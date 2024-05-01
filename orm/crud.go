@@ -67,9 +67,9 @@ func (o *ORM) buildUpdateQuery(entity interface{}) (string, []interface{}, error
 	var setClause []string
 	var values []interface{}
 
-	idField, ok := t.FieldByName("ID")
+	idField, ok := t.FieldByName("Id")
 	if !ok {
-		return "", nil, fmt.Errorf("entity must have an 'ID' field")
+		return "", nil, fmt.Errorf("entity must have an 'Id' field")
 	}
 
 	for i := 0; i < t.NumField(); i++ {
@@ -92,9 +92,9 @@ func (o *ORM) buildDeleteQuery(entity interface{}) (string, []interface{}, error
 		return "", nil, fmt.Errorf("entity must be a struct")
 	}
 
-	idField, ok := t.FieldByName("ID")
+	idField, ok := t.FieldByName("Id")
 	if !ok {
-		return "", nil, fmt.Errorf("entity must have an 'ID' field")
+		return "", nil, fmt.Errorf("entity must have an 'Id' field")
 	}
 
 	query := fmt.Sprintf("DELETE FROM %s WHERE %s = ?", getTableName(entity), idField.Tag.Get("db"))

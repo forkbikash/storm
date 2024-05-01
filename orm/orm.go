@@ -3,8 +3,9 @@ package orm
 import (
 	"database/sql"
 	"reflect"
-	"storm/db"
 	"strings"
+
+	"github.com/forkbikash/storm/db"
 )
 
 type ORM struct {
@@ -45,7 +46,8 @@ func (o *ORM) hydrate(dest interface{}, rows *sql.Rows) error {
 	values := make([]interface{}, len(columns))
 	destValue := reflect.ValueOf(dest).Elem()
 	for i := range values {
-		field := destValue.FieldByName(strings.Title(columns[i]))
+		str := strings.Title(columns[i])
+		field := destValue.FieldByName(str)
 		values[i] = field.Addr().Interface()
 	}
 
